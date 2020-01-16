@@ -20,50 +20,60 @@ block_genesis = {
     'transactions': {'tx1': '10'}
 }
 s1 += block_genesis['transactions']['tx1']
+
 block_2 = {
     'prev_hash': None,
     'transactions': {'tx1': '20'}
 }
+s2 += block_2['transactions']['tx1']
 
 block_3 = {
     'prev_hash': None,
     'transactions': {'tx1': '30'}
 }
+s3 += block_3['transactions']['tx1']
 
 block_4 = {
     'prev_hash': None,
     'transactions': {'tx1': '40'}
 }
+s4 += block_4['transactions']['tx1']
 
 block_5 = {
     'prev_hash': None,
     'transactions': {'tx1': '50'}
 }
+s5 += block_5['transactions']['tx1']
 
 block_6 = {
     'prev_hash': None,
     'transactions': {'tx1': '60'}
 }
+s6 += block_6['transactions']['tx1']
 
 block_7 = {
     'prev_hash': None,
     'transactions': {'tx1': '70'}
 }
+s7 += block_7['transactions']['tx1']
 
 block_8 = {
     'prev_hash': None,
     'transactions': {'tx1': '80'}
 }
+s8 += block_8['transactions']['tx1']
 
 block_9 = {
     'prev_hash': None,
     'transactions': {'tx1': '90'}
 }
+s9 += block_9['transactions']['tx1']
 
 block_10 = {
     'prev_hash': None,
     'transactions': {'tx1': '100'}
 }
+s10 += block_10['transactions']['tx1']
 # block_4 ['transactions']['tx1'] = input("Donate: ")
 
 i = 0
@@ -94,7 +104,8 @@ def hash_blocks(blocks):
 
 
 a = []
-a.append([block_genesis, block_2, block_3, block_4])
+a.append(block_genesis, block_2, block_3, block_4, block_5,
+         block_6, block_7, block_8, block_9, block_10)
 
 # for i in range(10):
 #     x = 0
@@ -180,23 +191,25 @@ print(hash_blocks([block_genesis, block_2, block_3, block_4,
                    block_5, block_6, block_7, block_8, block_9, block_10]) + "\n")
 print("New Tx1: " + a[0][n]['transactions']['tx1'])
 
-if s1 != a[0][0]['transactions']['tx1']:
+if a[0][0]['transactions']['tx1'] != s1:
     print('Adjust Block is genesis block')
-elif s2 != a[0][1]['transactions']['tx1']:
+elif a[0][1]['transactions']['tx1'] != s2:
     print('Adjust Block is block2')
-elif s3 != a[0][2]['transactions']['tx1']:
+elif a[0][2]['transactions']['tx1'] != s3:
     print('Adjust Block is block3')
-elif s4 != a[0][3]['transactions']['tx1']:
+elif a[0][n]['transactions']['tx1'] != s4:
     print('Adjust Block is block4')
-elif s5 != a[0][4]['transactions']['tx1']:
+elif a[0][n]['transactions']['tx1'] != s5:
     print('Adjust Block is block5')
-elif s6 != a[0][5]['transactions']['tx1']:
+elif a[0][n]['transactions']['tx1'] != s6:
     print('Adjust Block is block6')
-elif s7 != a[0][6]['transactions']['tx1']:
+elif a[0][n]['transactions']['tx1'] != s7:
     print('Adjust Block is block7')
-elif s8 != a[0][7]['transactions']['tx1']:
+elif a[0][n]['transactions']['tx1'] != s8:
     print('Adjust Block is block8')
-elif s9 != a[0][8]['transactions']['tx1']:
+elif a[0][n]['transactions']['tx1'] != s9:
     print('Adjust Block is block9')
-elif s10 != a[0][9]['transactions']['tx1']:
+elif a[0][n]['transactions']['tx1'] != s10:
     print('Adjust Block is block10')
+else:
+    print("Block is Ok")
