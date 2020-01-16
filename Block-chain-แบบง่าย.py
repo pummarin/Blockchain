@@ -4,7 +4,7 @@ import json
 hashs = []
 
 last_block_hash = None
-
+# สร้างบล็อค
 block_genesis = {
     'prev_hash': None,
     'transactions': {'tx1': '10'}
@@ -82,93 +82,57 @@ def hash_blocks(blocks):
     return prev_hash
 
 
+# ทำการแสดงค่าhashของแต่ละบล็อค
+TotalDonate = 0
+a = 0
 blocks = []
 for block in block_genesis, block_2, block_3, block_4, block_5, block_6, block_7, block_8, block_9, block_10:
     blocks.append(block)
-
-for i in range(len(blocks)):
-    if i == 0:
+    if a == 0:
         print("Genesis Block's hash")
     else:
-        print("block", i + 1, "'s hash")
-
-    last_block_hash = hashing_block(blocks[i], last_block_hash)
-    print("Total donate: " + blocks[i]['transactions']['tx1'])
-    # hashs[i] = last_block_hash
+        print("block", a + 1, "'s hash")
+    TotalDonate += int(blocks[a]['transactions']['tx1'])
+    last_block_hash = hashing_block(blocks[a], last_block_hash)
+    print("prev hash:", blocks[a]['prev_hash'])
+    print("Tx1: " + blocks[a]['transactions']['tx1'])
+    print("Total Donate:", TotalDonate)
+    hashs.append(last_block_hash)
     print(last_block_hash + "\n")
+    a += 1
 
-print("Original hash")
+print("Original hash All Block")
+old = hash_blocks([block_genesis, block_2, block_3, block_4,
+                   block_5, block_6, block_7, block_8, block_9, block_10])
+print(old)
+print("Total Donate: ", TotalDonate, "\n")
+
+# เลือกบล็อคที่ต้องการเปลี่ยนและเปลี่ยนแปลงค่า
+n = int(input("Input number for test chang data[0-9]: "))
+blocks[n]['transactions']['tx1'] = input("Input data: ")
+
+# hash บล็อคที่เปลี่ยนค่า
+tmp = hashing_block(blocks[n], last_block_hash)
+# newSumTotalDonate&&check block
+
+if hashs[n] != tmp:
+    if n == 0:
+        print("\ngenesis block is change")
+    else:
+        print("\nblock", n + 1, "is change")
+newTotalDonate = 0
+temp = []
+for i in range(len(blocks)):
+    newTotalDonate += int(blocks[i]['transactions']['tx1'])
+    temp.append(newTotalDonate)
+print("Tx1: ", blocks[n]['transactions']['tx1'])
+print("Total Donaate: ", temp[n])
+
+# print(hashs[0] == hashs1[0]+"\n")
+print("\nOriginal hash All Block")
+print(old)
+print("Total Donate: ", TotalDonate)
+print("\nAfter being modify")
 print(hash_blocks([block_genesis, block_2, block_3, block_4,
-                   block_5, block_6, block_7, block_8, block_9, block_10])+"\n")
-
-# print("prev_hash: " + blocks[1]['prev_hash'])
-
-# print("\nGenesis Block's hash")
-# last_block_hash = hashing_block(block_genesis, last_block_hash)
-# # x1 += last_block_hash
-# print("Total donate: "+block_genesis['transactions']['tx1'])
-# print(last_block_hash)
-
-# print("\nBlock2's hash")
-# last_block_hash = hashing_block(block_2, last_block_hash)
-# print("Total donate: "+block_2['transactions']['tx1'])
-# # x2 += last_block_hash
-# print(last_block_hash)
-
-# print("\nBlock3's hash")
-# last_block_hash = hashing_block(block_3, last_block_hash)
-# print("Total donate: "+block_3['transactions']['tx1'])
-# # x3 += last_block_hash
-# print(last_block_hash)
-
-# print("\nBlock4's hash")
-# last_block_hash = hashing_block(block_4, last_block_hash)
-# print("Total donate: "+block_4['transactions']['tx1'])
-# # x4 += last_block_hash
-# print(last_block_hash)
-
-# print("\nBlock5's hash")
-# last_block_hash = hashing_block(block_5, last_block_hash)
-# print("Total donate: "+block_5['transactions']['tx1'])
-# # x5 += last_block_hash
-# print(last_block_hash)
-
-# print("\nBlock6's hash")
-# last_block_hash = hashing_block(block_6, last_block_hash)
-# print("Total donate: "+block_6['transactions']['tx1'])
-# # x6 += last_block_hash
-# print(last_block_hash)
-
-# print("\nBlock7's hash")
-# last_block_hash = hashing_block(block_7, last_block_hash)
-# print("Total donate: "+block_7['transactions']['tx1'])
-# # x7 += last_block_hash
-# print(last_block_hash)
-
-# print("\nBlock8's hash")
-# last_block_hash = hashing_block(block_8, last_block_hash)
-# print("Total donate: "+block_8['transactions']['tx1'])
-# # x8 += last_block_hash
-# print(last_block_hash)
-
-# print("\nBlock9's hash")
-# last_block_hash = hashing_block(block_9, last_block_hash)
-# print("Total donate: "+block_9['transactions']['tx1'])
-# # x9 += last_block_hash
-# print(last_block_hash)
-
-# print("\nBlock10's hash")
-# last_block_hash = hashing_block(block_10, last_block_hash)
-# print("Total donate: "+block_10['transactions']['tx1'])
-# # x10 += last_block_hash
-# print(last_block_hash, "\n\n")
-
-
-# n = int(input("Number of block to chang[0-9]: "))
-# print("Old Tx1: " + a[0][n]['transactions']['tx1'])
-# a[0][n]['transactions']['tx1'] = input("Donate: ")
-
-# print("After being tampered")
-# print(hash_blocks([block_genesis, block_2, block_3, block_4,
-#                    block_5, block_6, block_7, block_8, block_9, block_10]) + "\n")
-# print("New Tx1: " + a[0][n]['transactions']['tx1'])
+                   block_5, block_6, block_7, block_8, block_9, block_10]))
+print("New Total Donate: ", newTotalDonate)
