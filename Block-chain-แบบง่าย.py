@@ -95,7 +95,7 @@ for block in block_genesis, block_2, block_3, block_4, block_5, block_6, block_7
     TotalDonate += int(blocks[a]['transactions']['tx1'])
     last_block_hash = hashing_block(blocks[a], last_block_hash)
     print("prev hash:", blocks[a]['prev_hash'])
-    print("Tx1: " + blocks[a]['transactions']['tx1'])
+    print("Tx1: ", blocks[a]['transactions']['tx1'])
     print("Total Donate:", TotalDonate)
     hashs.append(last_block_hash)
     print(last_block_hash + "\n")
@@ -112,27 +112,38 @@ n = int(input("Input number for test chang data[0-9]: "))
 blocks[n]['transactions']['tx1'] = input("Input data: ")
 
 # hash บล็อคที่เปลี่ยนค่า
-tmp = hashing_block(blocks[n], last_block_hash)
-# newSumTotalDonate&&check block
+if n == 0:
+    tmp = hashing_block(blocks[n], None)
+else:
+    tmp = hashing_block(blocks[n], hashs[n - 1])
+
+# debug
+# print("prev hash", hashs[n-1])
+# print(hashs[n])
+# print(tmp)
+
+# newSumTotalDonate && check block
 
 if hashs[n] != tmp:
     if n == 0:
         print("\ngenesis block is change")
     else:
         print("\nblock", n + 1, "is change")
-newTotalDonate = 0
-temp = []
-for i in range(len(blocks)):
-    newTotalDonate += int(blocks[i]['transactions']['tx1'])
-    temp.append(newTotalDonate)
-print("Tx1: ", blocks[n]['transactions']['tx1'])
-print("Total Donaate: ", temp[n])
+    newTotalDonate = 0
+    temp = []
+    for i in range(len(blocks)):
+        newTotalDonate += int(blocks[i]['transactions']['tx1'])
+        temp.append(newTotalDonate)
+    print("Tx1: ", blocks[n]['transactions']['tx1'])
+    print("Total Donaate: ", temp[n])
 
-# print(hashs[0] == hashs1[0]+"\n")
-print("\nOriginal hash All Block")
-print(old)
-print("Total Donate: ", TotalDonate)
-print("\nAfter being modify")
-print(hash_blocks([block_genesis, block_2, block_3, block_4,
-                   block_5, block_6, block_7, block_8, block_9, block_10]))
-print("New Total Donate: ", newTotalDonate)
+    # print(hashs[0] == hashs1[0]+"\n")
+    print("\nOriginal hash All Block")
+    print(old)
+    print("Total Donate: ", TotalDonate)
+    print("\nAfter being modify")
+    print(hash_blocks([block_genesis, block_2, block_3, block_4,
+                       block_5, block_6, block_7, block_8, block_9, block_10]))
+    print("New Total Donate: ", newTotalDonate)
+else:
+    print("\n All Block not change")
