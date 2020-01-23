@@ -89,16 +89,16 @@ blocks = []
 for block in block_genesis, block_2, block_3, block_4, block_5, block_6, block_7, block_8, block_9, block_10:
     blocks.append(block)
     if a == 0:
-        print("Genesis Block's hash")
+        print("Genesis Block")
     else:
-        print("block", a + 1, "'s hash")
+        print("block", a + 1)
     TotalDonate += int(blocks[a]['transactions']['tx1'])
     last_block_hash = hashing_block(blocks[a], last_block_hash)
     print("prev hash:", blocks[a]['prev_hash'])
     print("Tx1: ", blocks[a]['transactions']['tx1'])
     print("Total Donate:", TotalDonate)
     hashs.append(last_block_hash)
-    print(last_block_hash + "\n")
+    print("Block's hash:",last_block_hash + "\n")
     a += 1
 
 print("Original hash All Block")
@@ -117,13 +117,6 @@ if n == 0:
 else:
     tmp = hashing_block(blocks[n], hashs[n - 1])
 
-# debug
-# print("prev hash", hashs[n-1])
-# print(hashs[n])
-# print(tmp)
-
-# newSumTotalDonate && check block
-
 if hashs[n] != tmp:
     if n == 0:
         print("\ngenesis block is change")
@@ -136,6 +129,7 @@ if hashs[n] != tmp:
         temp.append(newTotalDonate)
     print("Tx1: ", blocks[n]['transactions']['tx1'])
     print("Total Donaate: ", temp[n])
+    print("Block's hash:",tmp)
 
     # print(hashs[0] == hashs1[0]+"\n")
     print("\nOriginal hash All Block")
